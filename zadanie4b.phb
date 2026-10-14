@@ -1,0 +1,45 @@
+<?php
+
+class Samochod {
+    public $waga;
+    public $data_przegladu;
+    public $marka;
+    public $kolor;
+    public $tablica_rejestracyjna;
+    public $punkty_karne = 0;
+
+    public function __construct($waga, $data_przegladu, $marka, $kolor, $tablica_rejestracyjna) {
+        $this->waga = $waga;
+        $this->data_przegladu = $data_przegladu;
+        $this->marka = $marka;
+        $this->kolor = $kolor;
+        $this->tablica_rejestracyjna = $tablica_rejestracyjna;
+    }
+
+    public function dodajPunktyKarne($punkty) {
+        $this->punkty_karne += $punkty;
+    }
+
+    public function czyDopuszczonyDoRuchu() {
+        $dzisiaj = date('Y-m-d');
+        if ($this->punkty_karne < 20 && $this->waga < 3500 && $this->data_przegladu > $dzisiaj) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+$vw = new Samochod(1500, "2027-05-10", "vw", "czarny", "CT 12345");
+$mercedes = new Samochod(2200, "2027-06-15", "mercedes", "bia?y", "DW54321");
+$bmw = new Samochod(2550, "2027-09-23", "bmw", "szary", "PP98765");
+
+$vw->dodajPunktyKarne(5);
+$vw->dodajPunktyKarne(10);
+
+$dop = $vw->czyDopuszczonyDoRuchu();
+if ($dop) {
+    echo "tak\n";
+} else {
+    echo "nie\n";
+}

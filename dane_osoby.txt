@@ -1,0 +1,4 @@
+Imie: ll
+Nazwisko: ff
+Wiek: 20
+Rok urodzenia: 2006
